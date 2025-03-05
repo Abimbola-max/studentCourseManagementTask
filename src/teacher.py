@@ -68,6 +68,7 @@ class Teacher:
 
     @staticmethod
     def validate_name(name):
+
         if not name:
             raise NullException("Fields cannot be empty.")
 
