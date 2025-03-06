@@ -7,6 +7,9 @@ import bcrypt
 class Teacher:
 
     def __init__(self, name, email, password):
+        self.validate_name(name)
+        self.validate_email(email)
+        self.validate_password(password)
         self.__email = email
         self.__password = password
         self.__name = name
@@ -47,9 +50,9 @@ class Teacher:
     def name(self, name):
         self.__name = name
 
-    @staticmethod
-    def hash_password(password):
-        return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+    # @staticmethod
+    # def hash_password(password):
+    #     return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
     @staticmethod
     def validate_email(email):
@@ -60,11 +63,11 @@ class Teacher:
         if not re.match(email_pattern, email):
             raise InvalidEmailPatternException("Invalid email address.")
 
-        with open("teacher_details", 'r') as file:
-            for line in file:
-                stored_email, stored_password = line.split(':')
-                if stored_email == email:
-                    return bcrypt.hashpw(stored_password.encode('utf-8'), stored_password.encode('utf-8'))
+        # with open("teacher_details", 'r') as file:
+        #     for line in file:
+        #         stored_email, stored_password = line.split(':')
+        #         if stored_email == email:
+        #             return bcrypt.hashpw(stored_password.encode('utf-8'), stored_password.encode('utf-8'))
 
     @staticmethod
     def validate_name(name):
@@ -72,7 +75,7 @@ class Teacher:
         if not name:
             raise NullException("Fields cannot be empty.")
 
-        names = name.split(':')
+        names = name.split(' ')
 
         if len(names) < 2:
             raise InvalidNameLengthException("First name and last name is required.")
@@ -80,8 +83,6 @@ class Teacher:
         for every_char in names:
             if not every_char.isalpha():
                 raise InvalidNameException("Name must contain only alphabetic character.")
-
-
 
     @staticmethod
     def validate_password(password):
@@ -98,7 +99,6 @@ class Teacher:
         self.teachers.append(details)
 
     def create_course(self, course_code: str, course_title: str):
-
         if self.__logged_in == False:
             raise VerificationFailedException("You are not logged in.")
         course = Course(course_code, course_title)
@@ -123,7 +123,8 @@ class Teacher:
 
     def get_number_of_students_in_course(self, course) -> int:
         if course in self.__courses:
-            return course.number_of_enrolled_students()
+            return course.
+
 
         raise NotFoundException("Course does not exist.")
 
@@ -134,10 +135,10 @@ class Teacher:
         course.add_grade(student, grade)
         return grade
 
-    @staticmethod
-    def save_to_file(name, email, password):
-        with open('teacher_details', 'a') as file:
-            file.write(f"{name}:{email}:{password}\n")
+    # @staticmethod
+    # def save_to_file(name, email, password):
+    #     with open('teacher_details', 'a') as file:
+    #         file.write(f"{name}:{email}:{password}\n")
 
 
 

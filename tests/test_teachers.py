@@ -1,33 +1,34 @@
 import unittest
 
+from exceptions.exception import NotFoundException
 from src.teachers import Teachers
 
 
 class MyTeachersTestCase(unittest.TestCase):
 
     def setUp(self):
-        self.teachers_management = Teachers()
+        self.teacher_management = Teachers()
 
     def test_that_a_teacher_can_be_added(self):
-        name = self.teachers_management.add_teacher("Dr Ayo")
-        self.assertIn(name, self.teachers_management.view_teachers())
+        teacher = self.teacher_management.add_teacher("Dr Favour", "FavourIgwe@gamil.com")
+        self.assertIn(teacher, self.teacher_management.teacher_list)
+        self.assertEqual(teacher["name"], "Dr Favour")
+        self.assertEqual(teacher["email"], "FavourIgwe@gamil.com")
 
     def test_that_a_teacher_can_be_removed(self):
-        name = self.teachers_management.add_teacher("Dr Ayo")
-        second_name = self.teachers_management.add_teacher("Dr Favour")
-        self.assertIn(name, self.teachers_management.view_teachers())
-        self.assertIn(second_name, self.teachers_management.view_teachers())
-        self.teachers_management.remove_teacher("Dr Favour")
-        self.assertNotIn(second_name, self.teachers_management.view_teachers())
-        self.assertTrue(second_name not in self.teachers_management.view_teachers())
+        self.teacher_management.add_teacher("Dr Favour", "FavourIgwe@gamil.com")
+        result = self.teacher_management.remove_teacher("FavourIgwe@gamil.com")
+        self.assertTrue(result)
+        with self.assertRaises(NotFoundException):
+            self.teacher_management.remove_teacher("FavourIgwe@gamil.com")
 
-    def test_that_teacher_can_be_found_using_name(self):
-        name = self.teachers_management.add_teacher("Dr Ayo")
-        second_name = self.teachers_management.add_teacher("Dr Favour")
-        self.assertIn(name, self.teachers_management.view_teachers())
-        self.assertIn(second_name, self.teachers_management.view_teachers())
-        found_teacher = self.teachers_management.find_teacher("Dr Favour")
-        self.assertTrue(found_teacher, self.teachers_management.view_teachers())
+    def test_find_teacher_by_email(self):
+        self.teacher_management.add_teacher("Dr Favour", "FavourIgwe@gamil.com")
+        teacher = self.teacher_management.find_teacher("FavourIgwe@gamil.com")
+        self.assertIsNotNone(teacher)
+        self.assertEqual(teacher["name"], "Dr Favour")
+        self.assertEqual(teacher["email"], "FavourIgwe@gamil.com")
 
-
-
+    def test_find_teacher_by_email_not_in_existence(self):
+        with self.assertRaises(NotFoundException):
+            self.teacher_management.find_teacher("Hamidd@gamil.com.com")

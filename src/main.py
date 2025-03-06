@@ -1,5 +1,9 @@
+import sys
+
+
 def main():
-    def get_choice(prompt):
+
+
         while True:
             choice = input(prompt)
             return choice
@@ -39,7 +43,7 @@ def main():
                                 print("view grades already")
                             case "4":
                                 print("Exiting...")
-                                return
+                                sys.exit(0)
                             case _:
                                 print("Invalid choice. Please try again.")
                     case "2":
@@ -61,12 +65,12 @@ def main():
                                 print("Notification sent successfully")
                             case "4":
                                 print("Exiting...")
-                                return
+                                sys.exit(0)
                             case _:
                                 print("Invalid choice. Please try again.")
                     case "3":
                         print("Exiting...")
-                        return
+                        sys.exit(0)
                     case _:
                         print("Invalid choice. Please try again.")
             case "2":
@@ -96,7 +100,7 @@ def main():
                                 print("view grades already")
                             case "4":
                                 print("Exiting...")
-                                return
+                                sys.exit(0)
                             case _:
                                 print("Invalid choice. Please try again.")
                     case "2":
@@ -123,12 +127,12 @@ def main():
                                 print("Invalid choice. Please try again.")
                     case "3":
                         print("Exiting...")
-                        return
+                        sys.exit(0)
                     case _:
                         print("Invalid choice. Please try again.")
             case "3":
                 print("Exiting...")
-                return
+                sys.exit(0)
             case _:
                 print("Invalid choice. Please try again.")
 

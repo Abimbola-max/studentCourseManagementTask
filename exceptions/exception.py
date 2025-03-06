@@ -72,3 +72,8 @@ class EmailAlreadyExistException(Exception):
     def __init__(self, message):
         self.message = message
         super().__init__(self.message)
+
+class AlreadyExistException(Exception):
+    def __init__(self, message):
+        self.message = message
+        super().__init__(self.message)

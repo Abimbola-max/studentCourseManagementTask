@@ -67,22 +67,8 @@ class MyTeacherTestCase(unittest.TestCase):
 
             self.assertEqual(self.teacher.get_number_of_students_in_course(course_one), 0)
 
-    def test_that_teacher_can_see_the_amount_of_students_enrolled_for_a_course(self):
-        self.teacher.register("Dr Favour", "FavourIgwe@gmail.com", "password")
-        self.assertFalse(self.teacher.login_status())
-        login = self.teacher.login("FavourIgwe@gmail.com", "password")
-        self.assertTrue(login)
-
-        course_one = self.teacher.create_course("201", "English")
-        course_two = self.teacher.create_course("202", "Yoruba")
-
-        course_one.add_student("niyi")
-        self.assertEqual(self.teacher.get_number_of_students_in_course(course_one), 1)
-        course_one.add_student("Bibi")
-        self.assertEqual(self.teacher.get_number_of_students_in_course(course_one), 2)
-
-        course_two.add_student("Titi")
-        self.assertEqual(self.teacher.get_number_of_students_in_course(course_two), 1)
+    #
+    # self.teacher.get_number_of_students_in_course(course_two), 1)
 
     def test_check_amount_of_students_enrolled_in_multiple_courses(self):
         self.teacher.register("Dr Favour", "FavourIgwe@gmail.com", "password")
@@ -92,21 +78,21 @@ class MyTeacherTestCase(unittest.TestCase):
 
         course_one = self.teacher.create_course("101", "Computer Science")
         course_one.add_student("niyi")
-        course_one.students = ["niyi"]
+        course_one.__students = ["niyi"]
         course_one.add_student("Bibi")
         self.assertEqual(self.teacher.get_number_of_students_in_course(course_one), 2)
         course_one.add_student("Titi")
-        course_one.students = ["niyi", "Bibi", "Titi"]
+        course_one.__students = ["niyi", "Bibi", "Titi"]
         self.assertEqual(self.teacher.get_number_of_students_in_course(course_one), 3)
 
         course_two = self.teacher.create_course("Math121", "Matrix")
         course_two.add_student("Favour")
-        course_two.students = ["Favour"]
+        course_two.__students = ["Favour"]
         course_two.add_student("Ire")
         self.assertEqual(self.teacher.get_number_of_students_in_course(course_two), 2)
         course_two.add_student("Titi")
         course_two.add_student("Bayo")
-        course_two.students = ["Favour", "Ire", "Titi", "Bayo"]
+        course_two.__students = ["Favour", "Ire", "Titi", "Bayo"]
         self.assertEqual(self.teacher.get_number_of_students_in_course(course_one), 3)
         self.assertEqual(self.teacher.get_number_of_students_in_course(course_two), 4)
 

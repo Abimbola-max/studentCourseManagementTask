@@ -1,3 +1,5 @@
+import pickle
+
 from exceptions.exception import *
 
 
@@ -50,6 +52,11 @@ class Course:
 
     def __str__(self):
         return f"Course = {self.course_code}, Title =  {self.title}"
+
+
+# def save_course_data(course, filename:str="course.pickle"):
+#     with open(filename, 'wb') as pickle_file:
+#         pickle.dump(course, pickle_file)
 
 
 

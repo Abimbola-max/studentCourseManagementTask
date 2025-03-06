@@ -1,4 +1,5 @@
-from exceptions.exception import NotFoundException, EmailAlreadyExistException, VerificationFailedException
+from exceptions.exception import NotFoundException, EmailAlreadyExistException, VerificationFailedException, \
+    AlreadyExistException
 from src.course import Course
 from src.teacher import Teacher
 
@@ -13,7 +14,6 @@ class Student(Teacher):
         super().validate_password(password)
         self.__courses = []
         self.__is_logged_in = False
-        self.__teachers = []
         self.__students = []
 
     def register(self, new_name, new_email, new_password):
@@ -42,7 +42,7 @@ class Student(Teacher):
             raise TypeError("new_course must be a Course.")
         for course in self.__courses:
             if course.title == new_course.title :
-                raise NotFoundException("Course exit ")
+                raise AlreadyExistException("Course already exists.")
         self.__courses.append(new_course)
 
     def view_courses(self) -> list:
@@ -62,6 +62,9 @@ class Student(Teacher):
         if email in Student.emails:
             raise EmailAlreadyExistException("Email already registered")
         Student.emails.add(email)
+
+    def check_notification(self):
+        pass
 
 
 
