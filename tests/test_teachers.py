@@ -1,6 +1,6 @@
 import unittest
 
-from src.Teachers import Teachers
+from src.teachers import Teachers
 
 
 class MyTeachersTestCase(unittest.TestCase):
@@ -20,4 +20,14 @@ class MyTeachersTestCase(unittest.TestCase):
         self.teachers_management.remove_teacher("Dr Favour")
         self.assertNotIn(second_name, self.teachers_management.view_teachers())
         self.assertTrue(second_name not in self.teachers_management.view_teachers())
+
+    def test_that_teacher_can_be_found_using_name(self):
+        name = self.teachers_management.add_teacher("Dr Ayo")
+        second_name = self.teachers_management.add_teacher("Dr Favour")
+        self.assertIn(name, self.teachers_management.view_teachers())
+        self.assertIn(second_name, self.teachers_management.view_teachers())
+        found_teacher = self.teachers_management.find_teacher("Dr Favour")
+        self.assertTrue(found_teacher, self.teachers_management.view_teachers())
+
+
 

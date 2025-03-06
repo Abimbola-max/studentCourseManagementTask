@@ -8,7 +8,6 @@ class Course:
         self.validate_title(title)
         self.__course_code = course_code
         self.__title = title
-        # self.__enrolled_students = []
         self.__grades = {}
 
 
@@ -23,10 +22,6 @@ class Course:
     @property
     def title(self):
         return self.__title
-
-    # @property
-    # def enrolled_students(self):
-    #     return self.__enrolled_students
 
     @title.setter
     def title(self, title):
@@ -47,26 +42,11 @@ class Course:
         if not isinstance(title, str) :
             raise InvalidCourseTitleException("title is not valid")
 
-    # def add_student(self, student: str):
-    #     if student in self.__enrolled_students:
-    #         raise StudentAlreadyEnrolledException("Student is already enrolled in this course")
-    #     self.__enrolled_students.append(student)
-    #
-    # def remove_student(self, student):
-    #     if not student in self.__enrolled_students:
-    #         raise CourseAlreadyRegisteredException("Course is already registered")
-    #     self.__enrolled_students.remove(student)
-    #
-    # def number_of_enrolled_students(self):
-    #     return len(self.__enrolled_students)
-
     def add_grade(self, student, grade):
         self.__grades[student] = grade
 
     def get_grade(self, student):
         return self.__grades.get(student)
-
-
 
     def __str__(self):
         return f"Course = {self.course_code}, Title =  {self.title}"
