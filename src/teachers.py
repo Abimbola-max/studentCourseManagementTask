@@ -1,6 +1,4 @@
 from exceptions.exception import NotFoundException
-from src.teacher import Teacher
-
 
 class Teachers:
 
@@ -23,7 +21,7 @@ class Teachers:
     def view_teachers(self):
         return self.teacher_list
 
-    def find_teacher(self, teacher_name) -> Teacher:
+    def find_teacher(self, teacher_name):
         for teacher in self.teacher_list:
             if teacher["name"] == teacher_name:
                 return teacher

@@ -1,5 +1,11 @@
 import unittest
 
+from exceptions.exception import NotFoundException
+from src.students import Students
+
 
 class MyStudentsTestCase(unittest.TestCase):
-    def test_that_students_can
+
+    def setUp(self):
+        self.students_management = Students()
+

@@ -63,8 +63,6 @@ class Student(Teacher):
             raise EmailAlreadyExistException("Email already registered")
         Student.emails.add(email)
 
-    @staticmethod
-    def verify_name(name ):
 
 
 
